@@ -34,12 +34,14 @@ class LinkedList(estrutura_elementar):
             while aux.get_proximo() is not None:
                 aux = aux.get_proximo()
             aux.set_proximo(novoNo)
+
 #---------------------------------------------------
     def esta_vazio(self) -> bool:
         if self.inicio is None:
             return True
         else:
             return False
+
 #---------------------------------------------------
     def remove(self, item):
         tep = self.inicio
@@ -73,53 +75,62 @@ class LinkedList(estrutura_elementar):
                 
             return cont
 
-#
+#----------------------------------------------------
     def limpa(self):
-        pass
+        while self.inicio is not None:
+            A = self.inicio
+            self.inicio = self.inicio.proximo
+            A = None
+        return
                 
-#--------------------
+#----------------------------------------------------
     def procura(self, item) -> bool:
-        if item > self.tamanho():
-            return False
-        if item <= self.tamanho():
-            cont = 1
-            aux = self.inicio
-            while aux.get_proximo() is not None:
-                cont = cont+1
-                aux = aux.get_proximo()        
-            return True
-        
+        procurado = self.inicio
+        index=0
+        while procurado:
+            if procurado.valor == item:
+
+                return True
+
+            else:
+                procurado = procurado.proximo
+                index = index + 1
+
         return False
-#-------
+       
+
+#------------------------------------------------------
     def indice_de(self, item):
-        if item <= self.tamanho():
-            cont = 1
-            aux = self.inicio
-            while aux.get_proximo() is not None:
-                if aux == item:
-                    return cont
-                else:
-                    cont=cont+1
-                    aux = aux.get_proximo()        
-            
-        if item > self.tamanho():
-            return -1 
-#-------
+        if self.tamanho() == 0:
+            return -1
+        
+        else:
+            procurado = self.inicio
+            indice=0
+            while procurado:
+                if procurado.valor == item:
+                
+                    return indice
+
+                procurado = procurado.proximo
+                indice = indice + 1
+        return -1
+
+         
+
+#-----------------------------------------------------
     def recupera_indice(self, index):
-        if index > self.tamanho():
-            return None
-        
-            
-        if index < self.tamanho():
+        if self.tamanho() > index:
+            procurado = self.inicio
             cont = 0
-            aux = self.inicio
-            while aux.get_proximo() is not None:
+            while procurado.get_proximo() is not None:
+                if cont == index:
+                    return procurado.valor
                 
-                    if cont == index:
-                        return #aux.valor
-                    else:
-                        cont=cont+1
-                        aux = aux.get_proximo()
-                
-            return  
+                cont = cont + 1
+                procurado = procurado.proximo
+            return procurado.valor
         
+        return None
+            
+                    
